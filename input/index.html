@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+       <meta charset="UTF-8">
+       <title>Form Input Bank Sampah</title>
+</head>
+<body>
+       <h2>Form Input Data Bank Sampah</h2>
+
+       <form action="input.php" onsubmit="return validateForm()" method="post">
+              <label for="nama_bank">Nama Bank Sampah:</label><br>
+              <input type="text" id="nama_bank" name="nama_bank" value=""><br>
+
+              <label for="alamat">Alamat:</label><br>
+              <input type="text" id="alamat" name="alamat" value=""><br>
+
+              <label for="lat">Latitude:</label><br>
+              <input type="text" id="lat" name="latitude" value=""><br>
+
+              <label for="long">Longitude:</label><br>
+              <input type="text" id="long" name="longitude" value=""><br><br>
+
+              <input type="submit" value="Submit">
+       </form>
+
+       <p id="informasi" style="color: red;"></p>
+
+       <script>
+              function validateForm() {
+                     let namaBank = document.getElementById("nama_bank").value.trim();
+                     let alamat   = document.getElementById("alamat").value.trim();
+                     let latitude = document.getElementById("lat").value;
+                     let longitude= document.getElementById("long").value;
+                     let text = "";
+
+                     if (namaBank === "") {
+                            text = "Nama Bank Sampah harus diisi.";
+                     } else if (alamat === "") {
+                            text = "Alamat harus diisi.";
+                     } else if (latitude === "" || isNaN(latitude) || latitude < -90 || latitude > 90) {
+                            text = "Latitude harus angka antara -90 dan 90.";
+                     } else if (longitude === "" || isNaN(longitude) || longitude < -180 || longitude > 180) {
+                            text = "Longitude harus angka antara -180 dan 180.";
+                     }
+
+                     document.getElementById("informasi").innerHTML = text;
+
+                     if (text !== "") {
+                            return false;
+                     }
+
+                     return true;
+              }
+       </script>
+</body>
+</html>
